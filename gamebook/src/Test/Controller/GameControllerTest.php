@@ -27,17 +27,24 @@ class GameTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testAddRating_withPost_isRedirect() {
 		/*
-		 teste funcional de formulario
-		 1 - abre URL
-		 2 - inpeciona formulario
-		 3 - manda os dados para a mesma url
-		 4 - CHECA NO BANCO - SEM USAR A INFRA. DO CONTRARIO VC ESTA USANDO O SISTEMA PARA SE TESTAR
+		 * teste funcional de formulario
+		 * 1 - abre URL
+		 * 2 - inpeciona formulario
+		 * 3 - manda os dados para a mesma url
+		 * 4 - CHECA NO BANCO - SEM USAR A INFRA. DO CONTRARIO VC ESTA USANDO O SISTEMA PARA SE TESTAR
 		 */
 		$client = new GuzzleHttp\Client ();
 		$response = $client->request ( 'POST', 'http://localhost/workspace/cursoPHPUnit/gamebook/web/add-rating.php?game=1', [ 
 				'allow_redirects' => false,
-				'form_params' => [ 
-						'score' => 5 
+				'multipart' => [ 
+						[ 
+								'name' => "score",
+								'contents' => '5' 
+						],
+						[ 
+								'name' => "screenshot",
+								'contents' => fopen(__DIR__.'/screenshot.jpg','r') 
+						] 
 				] 
 		] );
 		
@@ -55,5 +62,7 @@ class GameTest extends PHPUnit_Framework_TestCase {
 				'game_id' => 1,
 				'score' => '5' 
 		], $result [0] );
+		
+		$this->assertFileExists(__DIR__.'/../../../web/screenshots/1-1.jpg');
 	}
 }
