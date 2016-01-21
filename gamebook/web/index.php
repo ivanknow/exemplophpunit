@@ -13,7 +13,7 @@ $games = $repo->findByUserId(1);
 foreach ($games as $game) {
 ?>
 <li><?php echo $game->getTitle();?><br/>
-<?php echo $game->getRating();?><br/>
+<?php echo $game->getAvg();?><br/>
 <img alt="" src="<?php echo $game->getImagePath();?>"> <br/>
 </li>
 <?php

@@ -6,7 +6,7 @@ class Game{
 
 protected $title;
 protected $imagePath;
-protected $rating;
+protected $ratings;
 
 public function isRecomended($user){
 	$compatible = $user->getGenreCompatibility($this->getGenderCode());
@@ -14,7 +14,7 @@ public function isRecomended($user){
 }
 
 public function getAvg(){
-	$ratings = $this->getRating();
+	$ratings = $this->getRatings();
 	$numRatings = count($ratings);
 	
 	if($numRatings == 0){
@@ -34,10 +34,10 @@ public function getAvg(){
 	
 }
 
-public function __construct($title= "" ,$imagePath= "" ,$rating = 0){
+public function __construct($title= "" ,$imagePath= "" ,$ratings = array()){
 $this->title = $title;
 $this->imagePath = $imagePath;
-$this->rating = $rating;
+$this->ratings = $ratings;
 
 }
 
@@ -60,12 +60,12 @@ public function setImagePath($imagePath){
  $this->imagePath=$imagePath;
 }
 
-public function getRating(){
-return $this->rating;
+public function getRatings(){
+return $this->ratings;
 }
 
-public function setRating($rating){
- $this->rating=$rating;
+public function setRatings($ratings){
+ $this->ratings=$ratings;
 }
 
 }

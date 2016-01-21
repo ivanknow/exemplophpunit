@@ -25,7 +25,7 @@ class GameTest extends PHPUnit_Framework_TestCase{
 	
 	public function testAvarageScore_WithoutRatings_ReturnNull() {
 		$game = new Game();
-		$game->setRating([]);
+		$game->setRatings([]);
 		$this->assertNull($game->getAvg());
 	}
 	
@@ -37,7 +37,7 @@ class GameTest extends PHPUnit_Framework_TestCase{
 		$r2->method('getScore')->willReturn(8);
 		
 		$game = new Game();
-		$game->setRating([$r1,$r2]);
+		$game->setRatings([$r1,$r2]);
 		$this->assertEquals(7,$game->getAvg());
 	}
 	
@@ -49,8 +49,28 @@ class GameTest extends PHPUnit_Framework_TestCase{
 		$r2->method('getScore')->willReturn(5);
 	
 		$game = new Game();
-		$game->setRating([$r1,$r2]);
+		$game->setRatings([$r1,$r2]);
 		$this->assertEquals(5,$game->getAvg());
+	}
+	
+	public function testAvarageScore_With5_Return5() {
+		$r1 = $this->getMock('Rating',['getScore']);
+		$r1->method('getScore')->willReturn(5);
+
+	
+		$game = new Game();
+		$game->setRatings([$r1]);
+		$this->assertEquals(5,$game->getAvg());
+	}
+	
+	public function testAvarageScore_WithNull_ReturnNull() {
+		$r1 = $this->getMock('Rating',['getScore']);
+		$r1->method('getScore')->willReturn(null);
+	
+	
+		$game = new Game();
+		$game->setRatings([$r1]);
+		$this->assertEquals(null,$game->getAvg());
 	}
 	
 	public function testIsRecomendable_With2Compatibilityand10Ratings_ReturnFalse() {
