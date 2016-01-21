@@ -43,7 +43,7 @@ class GameTest extends PHPUnit_Framework_TestCase {
 						],
 						[ 
 								'name' => "screenshot",
-								'contents' => fopen(__DIR__.'/screenshot.jpg','r') 
+								'contents' => fopen ( __DIR__ . '/screenshot.jpg', 'r' ) 
 						] 
 				] 
 		] );
@@ -63,6 +63,17 @@ class GameTest extends PHPUnit_Framework_TestCase {
 				'score' => '5' 
 		], $result [0] );
 		
-		$this->assertFileExists(__DIR__.'/../../../web/screenshots/1-1.jpg');
+		$this->assertFileExists ( __DIR__ . '/../../../web/screenshots/1-1.jpg' );
+	}
+	public function testGameAPI_withUser_Return6Items() {
+		$client = new GuzzleHttp\Client ();
+		$response = $client->request ( "GET", 'http://localhost/workspace/cursoPHPUnit/gamebook/web/api-games.php', [ 
+				'json' => [ 
+						'user' => '1' 
+				], 
+		] );
+		
+		$json = $response->getBody()->getContents();
+		$this->assertJsonStringEqualsJsonString(file_get_contents(__DIR__ . '/api-games-user-test.json'), $json);
 	}
 }
