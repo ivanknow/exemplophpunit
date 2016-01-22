@@ -29,7 +29,7 @@ class GameRepository{
 	public function findByUSerId($id){
 		$games = [];
 		for($i = 0;$i<6;$i++){
-			$game = new Game();
+			$game = new Game($i);
 			$game->setTitle("Game .".$i);
 			$game->setImagePath("images/game.jpg");
 			$rating = new Rating();
