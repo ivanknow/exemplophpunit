@@ -22,6 +22,9 @@ class Game {
 		foreach ( $ratings as $value ) {
 			$score = $value->getScore ();
 			if ($score === null) {
+				if(count ( $ratings ) == 1){
+					return null;
+				}
 				$numRatings --;
 				continue;
 			}

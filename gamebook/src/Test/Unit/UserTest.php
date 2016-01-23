@@ -1,5 +1,5 @@
 <?php
-$loader = require __DIR__ . '/../../../vendor/autoload.php';
+
 
 class UserTest extends PHPUnit_Framework_TestCase{
 
