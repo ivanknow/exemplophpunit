@@ -1,0 +1,1 @@
+"php `which phpunit`  --coverage-html ../web/coverage" %*
